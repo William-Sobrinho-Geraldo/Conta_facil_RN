@@ -1,0 +1,40 @@
+import React from "react"
+import MyTextInputValores from "./compsTelaPrincipal/MyTextInputDoubles"
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native"
+import MyTextInputInteiros from "./compsTelaPrincipal/MyTextInputInteiros"
+import Resultados from "./compsTelaPrincipal/Resultados"
+
+export default function TelaPrincipal() {
+    return <SafeAreaView style={estilos.primeiroComponente}>
+        <MyTextInputValores label="Valor total da conta" placeholder="  R$ 0,00" />
+        <MyTextInputValores label="Valor das bebidas" placeholder="  R$0,00" />
+        <MyTextInputInteiros label="Total pessoas" placeholder="  Quantas pessoas dividirão a conta?" />
+        <MyTextInputInteiros label="Total de pessoas que bebem" placeholder="  Quantas pessoas consumiram bebidas alcoolicas?" />
+        <TouchableOpacity style={estilos.TouchableOpacity}>
+            <Text style={estilos.textoBotao}> CALCULAR </Text>
+        </TouchableOpacity>
+        <Resultados/>
+    </SafeAreaView>
+}
+
+const estilos = StyleSheet.create({
+    primeiroComponente: {
+        position: 'relative',
+        marginBottom: 20,
+        marginTop: 20,
+        marginHorizontal: 20,
+
+    },
+    TouchableOpacity: {
+        marginTop:80,
+        backgroundColor: "#2A9F85",
+        paddingVertical: 16,
+        borderRadius: 8,
+    },
+    textoBotao:{
+        fontSize:24,
+        lineHeight:30,
+        fontWeight:"bold",
+        textAlign:"center"
+    },
+})
