@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, TextInput, Text, View } from "react-native";
+import { StyleSheet, TextInput, Text, View } from "react-native";
 
 
-export default function MyTextInputInteiros({ label, placeholder, }) {
+export default function MyTextInputInteiros({ label, placeholder }) {
     const [totalPessoas, setTotalPessoas] = useState("");
+    console.log(totalPessoas)
 
     const totalPessoasInt = (newText) => {
         // Remover caracteres inválidos (ponto e vírgula)

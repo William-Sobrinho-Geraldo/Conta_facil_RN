@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, TextInput, Text, View } from "react-native";
+import { StyleSheet, TextInput, Text, View } from "react-native";
 
 
-export default function MyTextInputValores({ label, placeholder, }) {
-    const [valorTotalConta, setValorTotalConta] = useState("");
-
+export default function TextInputValorBebidas({ label, placeholder, }) {
+    const [valorTotalBebidas, setValorTotalBebidas] = useState("");
+    console.log("o valor das bebidas é " + valorTotalBebidas)
 
     const LimitandoCasasDecimaisValorTotalConta = (novoValorTotalConta) => {
         const valorTotalContaLimpo = novoValorTotalConta.replace(/[^0-9,','.]/g, '');
         const decimalText = limitarCasasDecimaisValorTotalConta(valorTotalContaLimpo, 2);
-        setValorTotalConta(decimalText);
+        setValorTotalBebidas(decimalText);
     }
-    const limitarCasasDecimaisValorTotalConta = (valorTotalConta, casasDecimais) => {
+    const limitarCasasDecimaisValorTotalConta = (valorTotalBebidas, casasDecimais) => {
         const regexValorTotalConta = new RegExp(`^(\\d+\\.\\d{0,${casasDecimais}}).*$`);
-        return valorTotalConta.replace(regexValorTotalConta, '$1');
+        return valorTotalBebidas.replace(regexValorTotalConta, '$1');
     };
 
 
@@ -29,7 +29,7 @@ export default function MyTextInputValores({ label, placeholder, }) {
             <Text style={estilos.label}>{label}</Text>
             <TextInput style={estilos.TextInput}
                 onChangeText={LimitandoCasasDecimaisValorTotalConta}
-                value={valorTotalConta}
+                value={valorTotalBebidas}
                 inputMode="numeric"
                 keyboardType="numeric"
                 placeholder={placeholder}
@@ -37,6 +37,8 @@ export default function MyTextInputValores({ label, placeholder, }) {
         </View>
     );
 };
+
+export const valorTotalBebidas = valorTotalBebidas;
 
 const estilos = StyleSheet.create({
     container: {
@@ -57,6 +59,8 @@ const estilos = StyleSheet.create({
         height: 45,
         borderColor: "gray",
         borderWidth: 1,
-        borderRadius:10,
+        borderRadius: 10,
     },
 })
+
+
