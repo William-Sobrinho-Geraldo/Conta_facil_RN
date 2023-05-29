@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { StyleSheet, TextInput, Text, View } from "react-native";
 
 
-export default function TextInputValorBebidas({ label, placeholder, }) {
+export default function TextInputValorBebidas({ label, placeholder, action}) {
     const [valorTotalBebidas, setValorTotalBebidas] = useState("");
-    console.log("o valor das bebidas é " + valorTotalBebidas)
+    //console.log("o valor das bebidas é " + valorTotalBebidas)
 
     const LimitandoCasasDecimaisValorTotalConta = (novoValorTotalConta) => {
         const valorTotalContaLimpo = novoValorTotalConta.replace(/[^0-9,','.]/g, '');
         const decimalText = limitarCasasDecimaisValorTotalConta(valorTotalContaLimpo, 2);
         setValorTotalBebidas(decimalText);
+        action(decimalText);
     }
     const limitarCasasDecimaisValorTotalConta = (valorTotalBebidas, casasDecimais) => {
         const regexValorTotalConta = new RegExp(`^(\\d+\\.\\d{0,${casasDecimais}}).*$`);

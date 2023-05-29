@@ -1,8 +1,14 @@
-export const SET_VALUE = 'SET_VALUE'
+export const alteraValorInputText = (value) => {
+    return {
+      type: 'SET_MY_VARIABLE',
+      payload: value
+    };
+  };
 
-export const setValue = (value) => ({
-    type: SET_VALUE,
-    payload: value,
-});
-
-
+  export const alteraValorBebidas = (value) => {
+    return {
+      type: 'ALTERA_VALOR_BEBIDAS',
+      payload: value
+    };
+  };
+  

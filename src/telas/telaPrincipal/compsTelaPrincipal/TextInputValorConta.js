@@ -1,54 +1,41 @@
 import React, { useState } from "react";
 import { StyleSheet, TextInput, Text, View } from "react-native";
-import { connect } from 'react-redux';
-import { setValue } from '../../../actions';
+import { useDispatch } from 'react-redux';
 
-function TextInputValorConta({ label, placeholder, value, setValue }) {
+
+function TextInputValorConta({ label, placeholder, action }) {
     const [valorTotalConta, setValorTotalConta] = useState("");
-    console.log("o valor da conta é " + valorTotalConta)
-
 
     const LimitandoCasasDecimaisValorTotalConta = (novoValorTotalConta) => {
         const valorTotalContaLimpo = novoValorTotalConta.replace(/[^0-9,','.]/g, '');
         const decimalText = limitarCasasDecimaisValorTotalConta(valorTotalContaLimpo, 2);
         setValorTotalConta(decimalText);
+        action(decimalText);
+        
     }
+
     const limitarCasasDecimaisValorTotalConta = (valorTotalConta, casasDecimais) => {
         const regexValorTotalConta = new RegExp(`^(\\d+\\.\\d{0,${casasDecimais}}).*$`);
         return valorTotalConta.replace(regexValorTotalConta, '$1');
     };
 
-
-    // const totalPessoasInt = (newText) => {
-    //     // Remover caracteres inválidos (ponto e vírgula)
-    //     const totalPessoasLimpo = newText.replace(/[.,]/g, '');
-    //     setTotalPessoas(totalPessoasLimpo);
-    // };
-
-
     return (
         <View style={estilos.container} >
             <Text style={estilos.label}>{label}</Text>
             <TextInput style={estilos.TextInput}
-                onChangeText={LimitandoCasasDecimaisValorTotalConta}
+                onChangeText={ LimitandoCasasDecimaisValorTotalConta }
                 value={valorTotalConta}
                 inputMode="numeric"
                 keyboardType="numeric"
                 placeholder={placeholder}
-            />
+            />        
+     
+
         </View>
     );
 };
 
-const mapStateToProps = (state) => ({
-    value: state.value,
-});
-const mapDispatchToProps = {
-    setValue,
-};
-export default connect(mapStateToProps, mapDispatchToProps)(TextInputValorConta);
-
-
+export default TextInputValorConta;
 
 
 const estilos = StyleSheet.create({
