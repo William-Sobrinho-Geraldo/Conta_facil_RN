@@ -11,4 +11,18 @@ export const alteraValorInputText = (value) => {
       payload: value
     };
   };
+
+  export const alteraQuantTotalPessoas = (value) => {
+    return {
+      type: "ALTERA_QUANT_TOTAL_PESSOAS",
+      payload: value
+    }
+  }
+
+  export const alteraQuantPessoasQueBebem = (value) => {
+    return {
+      type: "ALTERA_QUANT_PESSOAS_QUE_BEBEM",
+      payload: value
+    }
+  }
   
