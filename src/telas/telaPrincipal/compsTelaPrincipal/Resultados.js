@@ -1,32 +1,44 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { useSelector } from "react-redux";
 
-const Resultados = () => {
-    const valorTotalConta = useSelector(state => state.valorTotalContaStore.valorTotalConta);
-    console.log("\n\n\nO valorTotalContaStore é:  ", valorTotalConta )
+// function LimitandoCasasDecimaisPessoasQueBebem(pessoasQueBebemm) {
+//     const valorTotalContaLimpo = pessoasQueBebemm.replace(/[^0-9,','.]/g, '');
+//     const decimalText = limitarCasasDecimaisPessoasQueBebem(valorTotalContaLimpo, 2);
+//     return decimalText  
+// }
 
-    const valorBebidas = useSelector(state => state.valorBebidasStore.valorBebidas)
-    console.log("O valorBebidas é:  ", valorBebidas)
+// function limitarCasasDecimaisPessoasQueBebem (valorTotalBebidas, casasDecimais) {
+//     const regexValorTotalConta = new RegExp(`^(\\d+\\.\\d{0,${casasDecimais}}).*$`);
+//     return valorTotalBebidas.replace(regexValorTotalConta, '$1');
+// }
 
-    const TotalPessoas = useSelector(state => state.totalPessoasStore.totalPessoas)
-    console.log("O totalPessoasStore é:  ", TotalPessoas)
+const Resultados = ({ pessoasQueBebem , pessoasQueNaoBebem }) => {
+        
+    console.log("pessoas que bebem é : ", pessoasQueBebem);
+    // const quemBebeLimpo = limitarCasasDecimaisPessoasQueBebem(pessoasQueBebem, 2);
+    // console.log("pessoas que bebem limpo é : ", quemBebeLimpo);
 
-    const pessoasQueBebem = useSelector(state => state.pessoasQueBebemStore.pessoasQueBebem)
-    console.log("O quantidade de pessoas que bebem é: ",pessoasQueBebem)
+    
+    // const LimitandoCasasDecimaisPessoasQueBebem = (regexPessoasQueBebem) => {
+        // const valorTotalContaLimpo = pessoasQueBebem.replace(/[^0-9,','.]/g, '');
+        // const decimalText = limitarCasasDecimaisPessoasQueBebem(valorTotalContaLimpo, 2);
+        // return decimalText  
+    // };
+    // const limitarCasasDecimaisPessoasQueBebem = (valorTotalBebidas, casasDecimais) => {
+        // const regexValorTotalConta = new RegExp(`^(\\d+\\.\\d{0,${casasDecimais}}).*$`);
+        // return valorTotalBebidas.replace(regexValorTotalConta, '$1');
+    // };
 
 
-    const resultadoPessoasQueNaoBebem = ((valorTotalConta - valorBebidas) / TotalPessoas)
-    const resultadoPessoasQueBebem = resultadoPessoasQueNaoBebem + (valorBebidas / pessoasQueBebem)
 
     return <>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }} >
-            <Text style={estilos.texto}> Valor: quem Bebe </Text>
-            <Text style={estilos.numero}>{ resultadoPessoasQueBebem }</Text>
+            <Text style={estilos.texto}> Valor (Quem bebe) : </Text>
+            <Text style={estilos.numero}>R${ pessoasQueBebem }</Text>
         </View>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-            <Text style={estilos.texto}> Valor: quem NÃO BEBE </Text>
-            <Text style={estilos.numero}>{ resultadoPessoasQueNaoBebem }</Text>
+            <Text style={estilos.texto}> Valor (Quem NÃO bebe):</Text>
+            <Text style={estilos.numero}>R${ pessoasQueNaoBebem }</Text>
         </View>
     </>
 };

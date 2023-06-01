@@ -1,19 +1,43 @@
-import React from "react"
+import React, { useState } from "react"
 import TextInputValorConta from "./compsTelaPrincipal/TextInputValorConta"
 import TextInputValorBebidas, { valorTotalBebidas } from "./compsTelaPrincipal/TextInputValorBebidas"
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native"
 import TotalPessoas from "./compsTelaPrincipal/TotalPessoas"
 import PessoasQueBebem from "./compsTelaPrincipal/PessoasQueBebem"
 import Resultados from "./compsTelaPrincipal/Resultados"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { alteraValorInputText, alteraValorBebidas, alteraQuantTotalPessoas, alteraQuantPessoasQueBebem } from "../../actions"
 
 
 export default function TelaPrincipal() {
     const dispatch = useDispatch();
+    const [displayQuemBebe, setDisplayQuemBebe] = useState("0,00");
+    const [displayQuemNaoBebe, setDisplayQuemNaoBebe] = useState("0,00");
+    
+    const valorTotalConta = useSelector(state => state.valorTotalContaStore.valorTotalConta);
+    const valorBebidas = useSelector(state => state.valorBebidasStore.valorBebidas)
+    const quantTotalPessoas = useSelector(state => state.totalPessoasStore.totalPessoas)
+    const pessoasQueBebem = useSelector(state => state.pessoasQueBebemStore.pessoasQueBebem)
+
+    function calcularQuemNaoBebe() {
+        const resultadoPessoasQueNaoBebem = ((valorTotalConta - valorBebidas) / quantTotalPessoas)
+        return resultadoPessoasQueNaoBebem;
+    }
+    function calcularQuemBebe() {
+        const resultadoPessoasQueNaoBebem = ((valorTotalConta - valorBebidas) / quantTotalPessoas)
+        const resultadoPessoasQueBebem = resultadoPessoasQueNaoBebem + (valorBebidas / pessoasQueBebem)
+        return resultadoPessoasQueBebem;
+    }
+
+    const mostraResultados = () => {
+        setDisplayQuemBebe(calcularQuemBebe);
+        setDisplayQuemNaoBebe(calcularQuemNaoBebe);
+    };
+
+    const pessoasQueBebemFormated = displayQuemBebe.toFixed(2);
+    const pessoasQueNaoBebemFormated = displayQuemNaoBebe.toFixed(2);
 
     return <SafeAreaView style={estilos.primeiroComponente}>
-
         <TextInputValorConta
             label="Valor total da conta"
             placeholder="  R$ 0,00"
@@ -31,13 +55,15 @@ export default function TelaPrincipal() {
             placeholder="  Quantas pessoas consumiram bebidas alcoolicas?"
             action={(pessoasQueBebem) => { dispatch(alteraQuantPessoasQueBebem(pessoasQueBebem)) }} />
 
-        <TouchableOpacity style={estilos.TouchableOpacity}>
+        <TouchableOpacity style={estilos.TouchableOpacity} onPress={mostraResultados}>
             <Text style={estilos.textoBotao}> CALCULAR </Text>
         </TouchableOpacity>
+       
 
-        <Resultados />
+        <Resultados pessoasQueBebem={pessoasQueBebemFormated} pessoasQueNaoBebem={pessoasQueNaoBebemFormated} />
     </SafeAreaView>
 };
+
 
 const estilos = StyleSheet.create({
     primeiroComponente: {

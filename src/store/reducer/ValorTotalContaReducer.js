@@ -1,6 +1,6 @@
 
 const initialState = {
-    valorTotalConta: "0.00"
+    valorTotalConta: "241.50"
 }
 
 const valorTotalContaReducer = (state = initialState, action) => {

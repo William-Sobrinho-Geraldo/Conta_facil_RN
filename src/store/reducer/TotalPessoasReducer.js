@@ -1,6 +1,6 @@
 
 const initialState = {
-    totalPessoas: "0.00"
+    totalPessoas: "5"
 }
 
 const totalPessoasReducer = (state = initialState, action) => {

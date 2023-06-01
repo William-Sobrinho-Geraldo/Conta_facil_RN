@@ -1,6 +1,6 @@
 
 const initialState = {
-    pessoasQueBebem: "0.00"
+    pessoasQueBebem: "2"
 }
 
 const pessoasQueBebemReducer = (state = initialState, action) => {

@@ -1,6 +1,6 @@
 
 const initialState = {
-    valorBebidas: "0.00"
+    valorBebidas: "101.67"
 }
 
 const valorBebidasReducer = (state = initialState, action) => {
