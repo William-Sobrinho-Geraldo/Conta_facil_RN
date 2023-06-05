@@ -30,10 +30,12 @@ Para a estilização do app eu tive ajuda da minha amiga [Aline Sousa Santana](h
   display: flex;
   justify-content: center;
 }
+
 .image-container img {
   margin-right: 55px;
 }
 </style>
+
 </br>
 
 ## Conceitos aprendidos: 
