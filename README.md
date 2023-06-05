@@ -1,4 +1,3 @@
-# My market List
 ## Resumo
 
 Trate-se de um aplicativo para fazer divisão de contas de bares e restaurantes entre pessoas que consomem bebidas alcoólicas e as que não consomem.
