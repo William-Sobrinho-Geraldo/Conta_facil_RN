@@ -17,24 +17,11 @@ Para a estilização do app eu tive ajuda da minha amiga [Aline Sousa Santana](h
 
 </br>
 
-
 ## Imagens ilustrativas do projeto : 
 
 <div align="center"  class="image-container" >
 <image src = "https://user-images.githubusercontent.com/111225477/243363888-49bd9ff3-6ab3-49c2-ae51-e1e309319b0b.png" width = "200px" >
 <image src = "https://user-images.githubusercontent.com/111225477/243363894-b97edf36-f5ea-48fb-8376-7d3ced858092.png" width = "200px" >
-
-<style>
-.image-container {
-  display: flex;
-  justify-content: center;
-}
-
-.image-container img {
-  margin-right: 55px;
-}
-</style>
-
 </div>
 
 </br>
@@ -44,7 +31,6 @@ Para a estilização do app eu tive ajuda da minha amiga [Aline Sousa Santana](h
 - Hooks do React Native como : useState, useSelector, useDispatch
 - Estilização de componentes a partir de um layout do figma
 - Configuração de store, actions e reducers para o gerenciamento com Redux
-
 
 ## Próximas etapas - Loading ... 
 - Adicionar icones para orientar melhor o usuário na hora dos inputs de dados
