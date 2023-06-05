@@ -1,31 +1,36 @@
 import React, { useState } from "react"
-import TextInputValorConta from "./compsTelaPrincipal/TextInputValorConta"
-import TextInputValorBebidas, { valorTotalBebidas } from "./compsTelaPrincipal/TextInputValorBebidas"
+import ValorConta from "./compsTelaPrincipal/ValorConta"
+import ValorAlcoolicos from "./compsTelaPrincipal/ValorAlcoolicos"
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native"
 import TotalPessoas from "./compsTelaPrincipal/TotalPessoas"
 import PessoasQueBebem from "./compsTelaPrincipal/PessoasQueBebem"
+import ValorNaoAlcoolicos from "./compsTelaPrincipal/ValorNaoAlcoolicos"
 import Resultados from "./compsTelaPrincipal/Resultados"
 import { useDispatch, useSelector } from "react-redux"
-import { alteraValorInputText, alteraValorBebidas, alteraQuantTotalPessoas, alteraQuantPessoasQueBebem } from "../../actions"
+import { alteraValorInputText, alteraValorBebidas, alteraQuantTotalPessoas, alteraQuantPessoasQueBebem, alteraValorNaoAlcoolicos } from "../../actions"
+import LinearGradient from 'react-native-linear-gradient';
 
+const gradiente1 = "#B2E4AC"
+const gradiente2 = "#97C9E7"
+const gradiente3 = "#605AF2"
 
 export default function TelaPrincipal() {
     const dispatch = useDispatch();
-    const [displayQuemBebe, setDisplayQuemBebe] = useState("0,00");
-    const [displayQuemNaoBebe, setDisplayQuemNaoBebe] = useState("0,00");
-    
+    const [displayQuemBebe, setDisplayQuemBebe] = useState(0.00);
+    const [displayQuemNaoBebe, setDisplayQuemNaoBebe] = useState(0.00);
+
     const valorTotalConta = useSelector(state => state.valorTotalContaStore.valorTotalConta);
-    const valorBebidas = useSelector(state => state.valorBebidasStore.valorBebidas)
-    const quantTotalPessoas = useSelector(state => state.totalPessoasStore.totalPessoas)
-    const pessoasQueBebem = useSelector(state => state.pessoasQueBebemStore.pessoasQueBebem)
+    const valorAlcoolicos = useSelector(state => state.valorBebidasStore.valorBebidas);
+    const valorNaoAlcoolicos = useSelector(state => state.valorNaoAlcoolicosStore.valorNaoAlcoolicos)
+    const quantTotalPessoas = useSelector(state => state.totalPessoasStore.totalPessoas);
+    const quantAlcoolicos = useSelector(state => state.pessoasQueBebemStore.pessoasQueBebem);
 
     function calcularQuemNaoBebe() {
-        const resultadoPessoasQueNaoBebem = ((valorTotalConta - valorBebidas) / quantTotalPessoas)
+        const resultadoPessoasQueNaoBebem = ((valorTotalConta - valorNaoAlcoolicos - valorAlcoolicos) / quantTotalPessoas) + (valorNaoAlcoolicos / (quantTotalPessoas - quantAlcoolicos))
         return resultadoPessoasQueNaoBebem;
     }
     function calcularQuemBebe() {
-        const resultadoPessoasQueNaoBebem = ((valorTotalConta - valorBebidas) / quantTotalPessoas)
-        const resultadoPessoasQueBebem = resultadoPessoasQueNaoBebem + (valorBebidas / pessoasQueBebem)
+        const resultadoPessoasQueBebem = ((valorTotalConta - valorNaoAlcoolicos - valorAlcoolicos) / quantTotalPessoas) + (valorAlcoolicos / quantAlcoolicos)
         return resultadoPessoasQueBebem;
     }
 
@@ -34,36 +39,41 @@ export default function TelaPrincipal() {
         setDisplayQuemNaoBebe(calcularQuemNaoBebe);
     };
 
-    const pessoasQueBebemFormated = displayQuemBebe.toFixed(2);
-    const pessoasQueNaoBebemFormated = displayQuemNaoBebe.toFixed(2);
-
     return <SafeAreaView style={estilos.primeiroComponente}>
-        <TextInputValorConta
+        <ValorConta
             label="Valor total da conta"
             placeholder="  R$ 0,00"
             action={(decimalText) => { dispatch(alteraValorInputText(decimalText)) }} />
-        <TextInputValorBebidas
-            label="Valor das bebidas"
+        <ValorAlcoolicos
+            label="Valor das bebidas alcoólicas"
             placeholder="  R$0,00"
             action={(decimalText) => { dispatch(alteraValorBebidas(decimalText)) }} />
+        <ValorNaoAlcoolicos 
+            label="Valor das bebidas NÃO alcoólicas"
+            placeholder="  R$ 0,00"
+            action={(valorNaoAlcoolicos) => { dispatch(alteraValorNaoAlcoolicos(valorNaoAlcoolicos)) }}/>
         <TotalPessoas
             label="Total pessoas"
             placeholder="  Quantas pessoas dividirão a conta?"
             action={(totalPessoas) => { dispatch(alteraQuantTotalPessoas(totalPessoas)) }} />
         <PessoasQueBebem
-            label="Total de pessoas que bebem"
+            label="Total de pessoas que bebem alcoólicos"
             placeholder="  Quantas pessoas consumiram bebidas alcoolicas?"
             action={(pessoasQueBebem) => { dispatch(alteraQuantPessoasQueBebem(pessoasQueBebem)) }} />
 
-        <TouchableOpacity style={estilos.TouchableOpacity} onPress={mostraResultados}>
-            <Text style={estilos.textoBotao}> CALCULAR </Text>
+        <TouchableOpacity style={estilos.botao} onPress={mostraResultados}>
+            <LinearGradient
+                colors={[gradiente1, gradiente2, gradiente3]}
+                start={{ x: 0, y: 0.5 }}
+                end={{ x: 1, y: 0.5 }}
+                style={{ borderRadius: 5 }} >
+                <Text style={estilos.textoBotao}> CALCULAR </Text>
+            </LinearGradient>
         </TouchableOpacity>
-       
 
-        <Resultados pessoasQueBebem={pessoasQueBebemFormated} pessoasQueNaoBebem={pessoasQueNaoBebemFormated} />
-    </SafeAreaView>
+        <Resultados pessoasQueBebem={displayQuemBebe.toFixed(2)} pessoasQueNaoBebem={displayQuemNaoBebe.toFixed(2)} />
+    </SafeAreaView >
 };
-
 
 const estilos = StyleSheet.create({
     primeiroComponente: {
@@ -71,18 +81,19 @@ const estilos = StyleSheet.create({
         marginBottom: 20,
         marginTop: 20,
         marginHorizontal: 20,
-
     },
-    TouchableOpacity: {
-        marginTop: 80,
-        backgroundColor: "#2A9F85",
+    botao: {
+        marginTop: 50,
         paddingVertical: 16,
-        borderRadius: 8,
+        borderRadius: 10,
     },
     textoBotao: {
-        fontSize: 24,
-        lineHeight: 30,
+        height: 50,
+        fontSize: 26,
+        lineHeight: 32,
         fontWeight: "bold",
-        textAlign: "center"
+        textAlign: "center",
+        textAlignVertical: "center",
     },
+
 })

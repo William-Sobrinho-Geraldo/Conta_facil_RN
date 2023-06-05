@@ -12,6 +12,13 @@ export const alteraValorInputText = (value) => {
     };
   };
 
+  export const alteraValorNaoAlcoolicos = (value) => {
+    return {
+      type: 'ALTERA_VALOR_NAO_ALCOOLICOS',
+      payload: value
+    };
+  };
+
   export const alteraQuantTotalPessoas = (value) => {
     return {
       type: "ALTERA_QUANT_TOTAL_PESSOAS",

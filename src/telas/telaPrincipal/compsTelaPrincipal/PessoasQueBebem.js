@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import { StyleSheet, TextInput, Text, View } from "react-native";
 
-
-export default function PessoasQueBebem({ label, placeholder , action}) {
+export default function PessoasQueBebem({ label, placeholder, action }) {
     const [pessoasQueBebem, setPessoasQueBebem] = useState("");
-    console.log(pessoasQueBebem)
-
     const pessoasQueBebemInt = (newText) => {
-        // Remover caracteres inválidos (ponto e vírgula)
         const pessoasQueBebemLimpo = newText.replace(/[.,]/g, '');
         setPessoasQueBebem(pessoasQueBebemLimpo);
         action(pessoasQueBebemLimpo);
@@ -34,18 +30,19 @@ const estilos = StyleSheet.create({
     },
     label: {
         position: 'absolute',
-        top: -20,
-        left: 15,
-        fontWeight: "bold",
+        top: -22,
+        fontWeight: 700,
         backgroundColor: 'white',
         paddingHorizontal: 4,
-        fontSize: 15,
-        lineHeight: 18,
+        paddingStart: 8,
+        fontSize: 18,
+        lineHeight: 22,
     },
     TextInput: {
-        height: 45,
-        borderColor: "gray",
-        borderWidth: 1,
-        borderRadius:10,
+        fontSize: 15,
+        paddingStart: 12,
+        height: 48,
+        borderRadius: 10,
+        backgroundColor: "#E1F0ED",
     },
 })

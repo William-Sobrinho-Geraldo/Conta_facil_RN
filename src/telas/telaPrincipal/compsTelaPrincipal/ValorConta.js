@@ -1,28 +1,26 @@
 import React, { useState } from "react";
 import { StyleSheet, TextInput, Text, View } from "react-native";
 
-
-export default function TextInputValorBebidas({ label, placeholder, action}) {
-    const [valorTotalBebidas, setValorTotalBebidas] = useState("");
-
+function TextInputValorConta({ label, placeholder, action }) {
+    const [valorTotalConta, setValorTotalConta] = useState("");
     const LimitandoCasasDecimaisValorTotalConta = (novoValorTotalConta) => {
         const valorTotalContaLimpo = novoValorTotalConta.replace(/[^0-9,','.]/g, '');
         const decimalText = limitarCasasDecimaisValorTotalConta(valorTotalContaLimpo, 2);
-        setValorTotalBebidas(decimalText);
+        setValorTotalConta(decimalText);
         action(decimalText);
     }
-    const limitarCasasDecimaisValorTotalConta = (valorTotalBebidas, casasDecimais) => {
-        const regexValorTotalConta = new RegExp(`^(\\d+\\.\\d{0,${casasDecimais}}).*$`);
-        return valorTotalBebidas.replace(regexValorTotalConta, '$1');
-    };
 
+    const limitarCasasDecimaisValorTotalConta = (valorTotalConta, casasDecimais) => {
+        const regexValorTotalConta = new RegExp(`^(\\d+\\.\\d{0,${casasDecimais}}).*$`);
+        return valorTotalConta.replace(regexValorTotalConta, '$1');
+    };
 
     return (
         <View style={estilos.container} >
             <Text style={estilos.label}>{label}</Text>
             <TextInput style={estilos.TextInput}
                 onChangeText={LimitandoCasasDecimaisValorTotalConta}
-                value={valorTotalBebidas}
+                value={valorTotalConta}
                 inputMode="numeric"
                 keyboardType="numeric"
                 placeholder={placeholder}
@@ -31,7 +29,7 @@ export default function TextInputValorBebidas({ label, placeholder, action}) {
     );
 };
 
-export const valorTotalBebidas = valorTotalBebidas;
+export default TextInputValorConta;
 
 const estilos = StyleSheet.create({
     container: {
@@ -40,20 +38,19 @@ const estilos = StyleSheet.create({
     },
     label: {
         position: 'absolute',
-        top: -20,
-        left: 15,
-        fontWeight: "bold",
+        top: -22,
+        fontWeight: 700,
         backgroundColor: 'white',
         paddingHorizontal: 4,
-        fontSize: 15,
-        lineHeight: 18,
+        paddingStart: 8,
+        fontSize: 18,
+        lineHeight: 22,
     },
     TextInput: {
-        height: 45,
-        borderColor: "gray",
-        borderWidth: 1,
+        fontSize: 15,
+        paddingStart: 12,
+        height: 48,
         borderRadius: 10,
+        backgroundColor: "#E1F0ED",
     },
 })
-
-

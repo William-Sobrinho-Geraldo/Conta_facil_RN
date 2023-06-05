@@ -1,4 +1,3 @@
-
 const initialState = {
     valorBebidas: "101.67"
 }
@@ -13,9 +12,7 @@ const valorBebidasReducer = (state = initialState, action) => {
             default:
                 return state;
     }
-
 }
-
 
 export default valorBebidasReducer;
 

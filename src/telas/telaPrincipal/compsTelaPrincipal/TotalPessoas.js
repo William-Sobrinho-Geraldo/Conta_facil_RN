@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { StyleSheet, TextInput, Text, View } from "react-native";
 
-
 export default function TotalPessoas({ label, placeholder , action}) {
     const [totalPessoas, setTotalPessoas] = useState("");
-    console.log(totalPessoas)
 
     const totalPessoasInt = (newText) => {
-        // Remover caracteres inválidos (ponto e vírgula)
         const totalPessoasLimpo = newText.replace(/[.,]/g, '');
         setTotalPessoas(totalPessoasLimpo);
         action(totalPessoasLimpo);
@@ -34,18 +31,19 @@ const estilos = StyleSheet.create({
     },
     label: {
         position: 'absolute',
-        top: -20,
-        left: 15,
-        fontWeight: "bold",
+        top: -22,
+        fontWeight: 700,
         backgroundColor: 'white',
         paddingHorizontal: 4,
-        fontSize: 15,
-        lineHeight: 18,
+        paddingStart:8,
+        fontSize: 18,
+        lineHeight: 22,
     },
-    TextInput: {
-        height: 45,
-        borderColor: "gray",
-        borderWidth: 1,
-        borderRadius:10,
+    TextInput:{
+        fontSize:15,
+        paddingStart:12,
+        height: 48,
+        borderRadius: 10,
+        backgroundColor: "#E1F0ED",
     },
 })
