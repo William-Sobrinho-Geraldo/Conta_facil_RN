@@ -11,8 +11,8 @@ As veses essas divisões se tornam incômodas por ter pessoas que consumiram mui
 O App é todo escrito em **React Native** e só precisa de alguns inputs do usuário para realizar a divisão, sendo eles o valor da conta e o valor das bebidas alcoólicas e não alcoólicas.
 </br>
 Também precisa ser informado a quantidade de pessoas total que será dividida a conta.
-
 </br>
+
 Para a estilização do app eu tive ajuda da minha amiga [Aline Sousa Santana](https://www.linkedin.com/in/aline-sousa-santana-131535256/) que se propôs a criar uma tela no figma, a partir desse layout eu fui copiando as propriedades de cada componente de texto, corer, fontes e botões.
 
 </br>
@@ -23,7 +23,6 @@ Para a estilização do app eu tive ajuda da minha amiga [Aline Sousa Santana](h
 <div align="center"  class="image-container" >
 <image src = "https://user-images.githubusercontent.com/111225477/243363888-49bd9ff3-6ab3-49c2-ae51-e1e309319b0b.png" width = "200px" >
 <image src = "https://user-images.githubusercontent.com/111225477/243363894-b97edf36-f5ea-48fb-8376-7d3ced858092.png" width = "200px" >
-</div>
 
 <style>
 .image-container {
@@ -35,6 +34,8 @@ Para a estilização do app eu tive ajuda da minha amiga [Aline Sousa Santana](h
   margin-right: 55px;
 }
 </style>
+
+</div>
 
 </br>
 
